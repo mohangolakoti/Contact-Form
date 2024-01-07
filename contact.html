@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body ng-app="app" style="text-align:center">
+
+    <h2>ContactUs</h2>
+    <div class="container" ng-controller="ctrl">
+        
+        <form  name="myform" id="form" action="contact.php" method="POST" novalidate>
+
+            <div class="input-control">
+                <label for="name"> Name:</label>
+                <input type="text" ng-model="name" name="name" required>
+                <div class="error"><span ng-show="myform.$submitted || myform.name.$dirty">
+                    <span class="error" ng-show="myform.name.$error.required">*enter your name</span></span></div>
+            </div>
+
+            <div class="input-control">
+                <label for="name">DOB:</label>
+                <input type="date" ng-model="date" name="date" required>
+                <div class="error"><span ng-show="myform.$submitted || myform.date.$dirty">
+                    <span class="error" ng-show="myform.date.$error.required">*enter your date of birth</span></span></div>
+            </div>
+
+            <div class="input-control">
+                <label for="name">Address:</label>
+                <textarea type="address" rows="2" ng-model="address" name="address" required></textarea>
+                <div class="error"><span ng-show="myform.$submitted || myform.address.$dirty">
+                    <span class="error" ng-show="myform.address.$error.required">*enter your address</span></span></div>
+            </div>
+
+            <div class="input-control">
+                <label for="number">Ph no:</label>
+                <input type="text" ng-model="number" name="number" ng-pattern="re" required>
+                <div class="error"><span ng-show="myform.$submitted || myform.number.$dirty">
+                    <span class="error" ng-show="myform.number.$error.required">*enter your ph number</span></span>
+                <span class="error" ng-show="myform.number.$error.pattern">
+                    *enter 10 digits ph number
+                </span></div>
+            </div>
+
+            <div class="input-control" id="subject">
+                <label for="name" id="sub">Subject:</label>
+                <textarea id="tt" type="subject" rows="14" ng-model="subject" name="subject" required placeholder="write what you need"></textarea>
+                <div class="error"><span  ng-show="myform.$submitted || myform.subject.$dirty">
+                     <span class="error" ng-show="myform.subject.$error.required">*write subject on it</span></span></div>
+            </div>
+            
+            <input class="submit" type="submit" ng-disabled="myform.$dirty && myform.$invalid">
+            
+        </form>
+    </div>
+
+    <script>
+        
+        var app = angular.module("app", []);
+
+        app.controller('ctrl', function ($scope) {
+            $scope.re = /^[0-9]{10,10}$/;
+        });
+    </script>
+</body>
+
+</html>
